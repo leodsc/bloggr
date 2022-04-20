@@ -1,0 +1,28 @@
+@mixin flexCtn($direction, $align, $justify, $gap) {
+  display: flex;
+  flex-direction: $direction;
+  align-items: $align;
+  justify-content: $justify;
+  gap: $gap;
+}
+
+@mixin pageLimit($type) {
+  @if ($type == mobile) {
+    max-width: 500px;
+  } @else if ($type == $tablet) {
+    max-width: 700px;
+  } @else {
+    max-width: 900px;
+  }
+}
+
+@mixin pageForm() {
+  padding: 3rem 0;
+  width: 100vw;
+  &__info-ctn {
+    @include flexCtn(column, center, center, 3rem);
+  }
+  &__title {
+    font-size: map-get($font-sizes, extra-large);
+  }
+}

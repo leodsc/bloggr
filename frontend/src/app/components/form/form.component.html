@@ -1,0 +1,32 @@
+<form class="form">
+  <div *ngFor="let label of content; let i = index" class="col-12 md:col-4">
+    <div class="p-inputgroup">
+      <span class="p-inputgroup-addon"
+        ><img src="{{ label.icon }}" alt=""
+      /></span>
+      <span class="p-float-label p-input-icon-right">
+        <input type="text" />
+        <input
+          *ngIf="label.model !== undefined"
+          name="{{ label.name }}"
+          id="float-input"
+          type="{{ label.type }}"
+          [(ngModel)]="label.model[objectKeys(label.model)[0]]"
+          pInputText
+        />
+        <input
+          *ngIf="label.model === undefined"
+          name="{{ label.name | lowercase }}"
+          id="float-input"
+          type="text"
+          pInputText
+        />
+        <i class="pi pi-exclamation-circle"></i>
+        <label for="float-input">{{ label.placeholder }}</label>
+      </span>
+    </div>
+  </div>
+  <p-button class="p-button-success" (click)="send()">
+    {{ buttonText }}</p-button
+  >
+</form>

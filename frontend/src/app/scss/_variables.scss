@@ -1,0 +1,28 @@
+// colors
+$pink: #e08dac;
+$purple: #6a7fdb;
+$light-blue: #57e2e5;
+$green: #45cb85;
+$black: #153131;
+$shade: rgba(0, 0, 0, 0.25);
+
+// fonts
+$font-weights: (
+  bold: 700,
+  regular: 400,
+  thin: 200,
+);
+$font-sizes: (
+  extra-small: 0.5rem,
+  small: 1rem,
+  medium: 1.5rem,
+  large: 2rem,
+  extra-large: 3rem,
+);
+
+// borders
+$thin-border: 1px solid rgba(0, 0, 0, 0.25);
+
+// media queries
+$mobile: 768px;
+$tablet: 900px;

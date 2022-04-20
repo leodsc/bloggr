@@ -1,0 +1,126 @@
+<main class="signup-page">
+  <p-toast
+    key="message"
+    position="center"
+    [breakpoints]="{ '400px': { width: '90%' } }"
+  ></p-toast>
+  <p-toast
+    key="userExists"
+    [breakpoints]="{ '400px': { width: '90%' } }"
+    position="center"
+  >
+    <ng-template let-message pTemplate="message">
+      <div class="message" style="flex: 1">
+        <i class="pi pi-exclamation-triangle" style="font-size: 3rem"></i>
+        <div>
+          <h4>{{ message.summary }}</h4>
+          <a class="link-recover" routerLink="/recuperar"
+            >Clique aqui para recuperar</a
+          >
+        </div>
+      </div>
+    </ng-template>
+  </p-toast>
+  <section class="signup-page__info-ctn">
+    <h1 class="signup-page__title">Cadastre-se</h1>
+    <img src="assets/images/signup.svg" alt="" />
+
+    <form class="form">
+      <div class="col-12 md:col-4">
+        <div class="p-inputgroup">
+          <span class="p-inputgroup-addon"
+            ><img src="assets/icons/badge.svg" alt=""
+          /></span>
+          <span class="p-float-label p-input-icon-right">
+            <input
+              name="name"
+              id="float-input"
+              type="text"
+              [(ngModel)]="this.user.name"
+              pInputText
+            />
+            <i class="pi pi-exclamation-circle"></i>
+            <label for="float-input">Insira seu nome.</label>
+          </span>
+        </div>
+      </div>
+
+      <div class="col-12 md:col-4">
+        <div class="p-inputgroup">
+          <span class="p-inputgroup-addon"
+            ><img src="assets/icons/mail.svg" alt=""
+          /></span>
+          <span class="p-float-label p-input-icon-right">
+            <input
+              name="email"
+              id="float-input"
+              type="email"
+              [(ngModel)]="this.user.email"
+              pInputText
+            />
+            <i class="pi pi-exclamation-circle"></i>
+            <label for="float-input">Insira seu email.</label>
+          </span>
+        </div>
+      </div>
+
+      <div class="col-12 md:col-4">
+        <div class="p-inputgroup">
+          <span class="p-inputgroup-addon"
+            ><img src="assets/icons/birthday.svg" alt=""
+          /></span>
+          <span class="p-float-label p-input-icon-right">
+            <p-calendar
+              [style]="{ width: '100%' }"
+              inputId="basic"
+              #birthdayInput
+            ></p-calendar>
+            <i class="pi pi-exclamation-circle"></i>
+            <label for="float-input">Insira sua data de aniversário.</label>
+          </span>
+        </div>
+      </div>
+
+      <div class="col-12 md:col-4">
+        <div class="p-inputgroup">
+          <span class="p-inputgroup-addon"
+            ><img src="assets/icons/key.svg" alt=""
+          /></span>
+          <span class="p-float-label p-input-icon-right">
+            <input
+              name="password"
+              id="float-input"
+              type="password"
+              [(ngModel)]="this.user.password"
+              pInputText
+            />
+            <i class="pi pi-exclamation-circle"></i>
+            <label for="float-input">Insira sua senha.</label>
+          </span>
+        </div>
+      </div>
+
+      <div class="col-12 md:col-4">
+        <div class="p-inputgroup">
+          <span class="p-inputgroup-addon"
+            ><img src="assets/icons/key.svg" alt=""
+          /></span>
+          <span class="p-float-label p-input-icon-right">
+            <input
+              name="confirm-password"
+              id="float-input"
+              type="password"
+              [(ngModel)]="confirmPassword"
+              pInputText
+            />
+            <i class="pi pi-exclamation-circle"></i>
+            <label for="float-input">Confirme sua senha.</label>
+          </span>
+        </div>
+      </div>
+      <p-button (click)="signup()" class="p-button-succcess"
+        >Cadastrar</p-button
+      >
+    </form>
+  </section>
+</main>

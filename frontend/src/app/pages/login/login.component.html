@@ -1,0 +1,48 @@
+<main class="login-page">
+  <p-toast position="center"></p-toast>
+  <section class="login-page__info-ctn">
+    <h1 class="login-page__title">Entrar</h1>
+    <img class="login-page__img" src="assets/images/login.png" alt="" />
+
+    <form class="form">
+      <div class="col-12 md:col-4">
+        <div class="p-inputgroup">
+          <span class="p-inputgroup-addon"
+            ><img src="assets/icons/mail.svg" alt=""
+          /></span>
+          <span class="p-float-label p-input-icon-right">
+            <input
+              name="email"
+              id="float-input"
+              type="email"
+              [(ngModel)]="this.user.email"
+              pInputText
+            />
+            <i class="pi pi-exclamation-circle"></i>
+            <label for="float-input">Insira seu email.</label>
+          </span>
+        </div>
+      </div>
+
+      <div class="col-12 md:col-4">
+        <div class="p-inputgroup">
+          <span class="p-inputgroup-addon"
+            ><img src="assets/icons/key.svg" alt=""
+          /></span>
+          <span class="p-float-label p-input-icon-right">
+            <input
+              name="password"
+              id="float-input"
+              type="password"
+              [(ngModel)]="this.user.password"
+              pInputText
+            />
+            <i class="pi pi-exclamation-circle"></i>
+            <label for="float-input">Insira sua senha.</label>
+          </span>
+        </div>
+      </div>
+      <p-button (click)="login()">Entrar</p-button>
+    </form>
+  </section>
+</main>

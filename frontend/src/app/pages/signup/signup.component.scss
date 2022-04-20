@@ -1,0 +1,15 @@
+@import "../../scss/mixins";
+@import "../../scss/variables";
+
+.signup-page {
+  @include pageForm();
+}
+
+.message {
+  @include flexCtn(row, center, space-between, 1rem);
+}
+
+.link-recover {
+  text-decoration: underline;
+  color: $purple;
+}

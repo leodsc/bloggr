@@ -1,0 +1,37 @@
+@import "../../scss/variables";
+@import "../../scss/mixins";
+
+.header {
+  @include flexCtn(row, center, center, 0);
+  background-color: white;
+  padding: 1.5rem 2rem;
+  margin: 0 auto;
+  width: 100%;
+  border-bottom: $thin-border;
+  #{&}__title {
+    font-weight: map-get($font-weights, regular);
+  }
+
+  &__ctn {
+    // max-width: 80%;
+    @include pageLimit(mobile);
+    // max-width: 800px;
+    flex: 1;
+    @include flexCtn(row, center, space-between, 0);
+  }
+
+  #{&}__menu-btn {
+    cursor: pointer;
+  }
+}
+
+.nav {
+  &__links-ctn {
+    &--link {
+      padding: 1rem;
+      border-top: $thin-border;
+      border-bottom: $thin-border;
+      @include flexCtn(row, center, flex-start, 1rem);
+    }
+  }
+}
