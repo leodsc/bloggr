@@ -47,7 +47,11 @@ export class LoginComponent implements OnInit {
     private message: MessageService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.auth.getAll().subscribe((resp: User[]) => {
+      console.log(resp);
+    });
+  }
 
   login() {
     this.auth.login(this.user).subscribe(

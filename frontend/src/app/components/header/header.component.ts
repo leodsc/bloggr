@@ -32,8 +32,6 @@ export class HeaderComponent implements OnInit {
           this.links = [
             new HeaderLink(this.iconsPath + 'home.svg', 'Inicio'),
             new HeaderLink(this.iconsPath + 'user.svg', 'Perfil'),
-            new HeaderLink(this.iconsPath + 'add.svg', 'Novo Post'),
-            new HeaderLink(this.iconsPath + 'search.svg', 'Procurar'),
             new HeaderLink(this.iconsPath + 'config.svg', 'Configurações'),
             new HeaderLink(this.iconsPath + 'logout.svg', 'Sair'),
           ];

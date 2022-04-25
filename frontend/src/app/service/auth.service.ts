@@ -13,6 +13,10 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
+  getAll(): Observable<User[]> {
+    return this.http.get<User[]>(environment.server + 'teste');
+  }
+
   login(user: User): Observable<HttpResponse<User>> {
     return this.http.post<User>(environment.server + 'login', user, {
       observe: 'response',
