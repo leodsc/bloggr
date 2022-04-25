@@ -2,25 +2,35 @@ package com.bloggr.controller;
 
 import com.bloggr.model.UserLogin;
 import com.bloggr.model.UserModel;
+import com.bloggr.repository.UserRepository;
 import com.bloggr.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
+//@CrossOrigin(origins="${app.frontend.origin}", allowedHeaders="*", exposedHeaders="Authorization")
 public class AuthController {
 
     @Autowired
     private AuthService authService;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @GetMapping("/teste")
+    public List<UserModel> getAll() {
+        return userRepository.findAll();
+    }
 
     @PostMapping("/login")
     public ResponseEntity<UserModel> login(@RequestBody UserLogin user) {
@@ -30,7 +40,6 @@ public class AuthController {
         } else {
             HttpHeaders headers = new HttpHeaders();
             headers.setBasicAuth(user.getEmail(), user.getPassword());
-            System.out.println(result.get().getBirthday());
             return ResponseEntity.ok().headers(headers).body(result.get());
         }
     }

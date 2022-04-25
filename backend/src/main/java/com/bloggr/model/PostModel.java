@@ -19,12 +19,12 @@ public class PostModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
-    @Size(min=5, max=32)
+    @NotNull(message="Título não pode ser nulo!")
+    @Size(min=5, max=32, message="Título deve ter entre 5 e 32 caracteres!")
     private String title;
 
-    @NotNull
-    @Size(min=32, max=10000)
+    @NotNull(message="Texto não pode ser nulo!")
+    @Size(min=32, max=10000, message="Texto deve ter entre 32 e 10000 caracteres!")
     private String text;
 
     @Temporal(TemporalType.DATE)
