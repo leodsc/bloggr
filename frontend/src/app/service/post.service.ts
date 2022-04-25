@@ -15,6 +15,6 @@ export class PostService {
   }
 
   createPost(post: Post): Observable<Post> {
-    return this.http.post<Post>(environment.server + 'post', post);
+    return this.http.post<Post>(environment.server + 'post/create', post);
   }
 }

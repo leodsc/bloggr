@@ -25,7 +25,6 @@ export class AuthInterceptor implements HttpInterceptor {
     );
     if (!shouldIgnoreThisPath) {
       req = this.addAuthHeaders(req);
-      console.log(req);
     }
     return next.handle(req);
   }

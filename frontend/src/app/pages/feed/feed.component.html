@@ -4,6 +4,7 @@
 <h1 *ngFor="let post of posts">
   {{ post.title }}
 </h1>
+<p-toast position="top"></p-toast>
 <p-dialog
   header="{{ dialog.title }}"
   [closable]="false"
@@ -18,6 +19,7 @@
       /></span>
       <span class="p-float-label p-input-icon-right">
         <input
+          name="title"
           [(ngModel)]="post.title"
           type="text"
           pInputText
@@ -30,10 +32,19 @@
 
     <quill-editor
       [(ngModel)]="post.text"
+      name="text"
       placeholder="Insira seu texto..."
       [modules]="modules"
     >
     </quill-editor>
+    <div class="field-checkbox">
+      <p-checkbox
+        name="pin-post"
+        [(ngModel)]="post.pinned"
+        [binary]="true"
+      ></p-checkbox>
+      <label for="pin-post">Fixar esse post no meu perfil</label>
+    </div>
   </div>
 
   <ng-template pTemplate="footer">
@@ -50,54 +61,3 @@
   className="speeddial-right"
   direction="up"
 ></p-speedDial>
-
-Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat iure quod
-autem rem. Minus qui fuga inventore ipsa impedit magnam ab eveniet error
-ratione, sint modi necessitatibus, illum laboriosam excepturi facere atque
-doloremque! Voluptatem impedit minus dolores harum amet autem fuga nisi quidem
-deserunt omnis sit blanditiis aut enim ut nesciunt quod quibusdam quis eaque,
-illum inventore quaerat voluptatibus possimus. Quibusdam, saepe veniam tempora
-accusantium fugiat exercitationem adipisci perspiciatis soluta non at quisquam
-officia nostrum eveniet iure ipsum, dicta dignissimos possimus delectus et
-cupiditate in? Facilis molestias cupiditate dolor odio nesciunt ratione porro
-deleniti quas eum aliquid ducimus assumenda beatae ad velit molestiae, provident
-delectus nam sequi excepturi harum quia exercitationem temporibus distinctio
-fugiat! Magni officiis totam, dolores ratione asperiores facere, corporis
-quisquam fugiat vitae et illum debitis quia vel maxime fuga accusantium
-voluptatem eum sint? Dolores officiis, perspiciatis odio sapiente praesentium
-nemo. Hic consequuntur debitis quidem nulla illo sed vel possimus fugiat
-cupiditate saepe natus, necessitatibus aliquam delectus cumque id qui! Obcaecati
-tempore sint, dignissimos voluptas facere doloribus ad soluta eveniet quia
-temporibus dolores officia doloremque fugiat porro a amet modi nulla ducimus
-nobis facilis iste velit harum? Est culpa eum facilis numquam deserunt,
-laboriosam id suscipit vitae excepturi optio amet quis? Iusto exercitationem
-debitis facilis esse laboriosam totam reiciendis tempore temporibus amet magni
-hic consequatur tempora dolore dolores mollitia, dicta suscipit nam quae est
-harum illo quis consectetur recusandae. Corporis eveniet similique quia odit,
-assumenda suscipit maiores aspernatur itaque pariatur cum? Eveniet explicabo ab
-amet dolor suscipit totam omnis pariatur impedit architecto? Eligendi natus
-maxime neque, molestiae veniam deserunt in facere quas accusamus laborum vero.
-Iure molestias porro corporis facilis aut? Ipsa perspiciatis tenetur sapiente
-ratione molestiae voluptate distinctio cumque deserunt quo maxime? Iusto et,
-eius ipsum corporis sapiente expedita perferendis necessitatibus itaque
-laudantium voluptatum repellendus. Debitis modi corrupti mollitia beatae
-delectus, deleniti dolore illum nemo, maxime quidem expedita deserunt aliquid
-repellat ipsum error, nulla fugit architecto accusantium tenetur? Autem iusto
-assumenda eius magnam obcaecati deserunt facere reprehenderit temporibus ipsum
-dignissimos eaque fugiat, impedit hic maiores perspiciatis blanditiis eveniet?
-Inventore aspernatur eum nostrum totam ipsam qui perferendis officia maiores
-excepturi corporis modi iusto accusantium iure, sequi error! Recusandae
-necessitatibus tempora atque quos similique repellendus! Pariatur explicabo
-illum eveniet magnam culpa, earum praesentium expedita sapiente odit ratione
-maiores aspernatur dolor odio, eaque tenetur quia enim, quisquam est. Modi ipsum
-placeat laborum eius libero tempore quia perspiciatis enim qui nam accusamus
-fugit expedita cum quisquam sed, eveniet neque, laboriosam fugiat, iusto
-quibusdam vel provident illum ad. Distinctio, alias magnam in voluptas
-aspernatur veritatis nulla unde vitae incidunt nemo architecto laboriosam
-placeat odit vel earum! Molestiae quos illo exercitationem quaerat reiciendis,
-atque tempora repellendus placeat est asperiores a mollitia consequatur nihil
-voluptatibus suscipit quo ex quidem, maiores natus saepe voluptate, architecto
-velit cum? Voluptate officia veniam repellendus mollitia consequuntur doloribus
-fuga suscipit earum! Nam laudantium, id nesciunt cupiditate quo officiis labore
-fugit quisquam illum fugiat debitis officia non nobis, eius vero repellat. Animi
-provident iure eveniet blanditiis. Laboriosam impedit saepe explicabo.

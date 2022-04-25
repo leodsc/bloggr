@@ -30,6 +30,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { ToastModule } from 'primeng/toast';
 import { SpeedDialModule } from 'primeng/speeddial';
 import { DialogModule } from 'primeng/dialog';
+import { CheckboxModule } from 'primeng/checkbox';
 
 // quill
 import { QuillModule } from 'ngx-quill';
@@ -59,6 +60,7 @@ import { QuillModule } from 'ngx-quill';
     ToastModule,
     SpeedDialModule,
     DialogModule,
+    CheckboxModule,
     QuillModule.forRoot(),
   ],
   providers: [httpInterceptorProviders],

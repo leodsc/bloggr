@@ -5,7 +5,7 @@ export class Post {
   title: string;
   text: string;
   date: Date;
-  user: User;
+  user = new User();
   commentary: Commentary;
   pinned: boolean;
 }

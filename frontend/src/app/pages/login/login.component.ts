@@ -17,29 +17,6 @@ import { UserService } from 'src/app/service/user.service';
 export class LoginComponent implements OnInit {
   user = new User();
 
-  labels: Label[] = [
-    new Label(
-      'Email',
-      'assets/icons/mail.svg',
-      'Insira seu e-mail.',
-      'email',
-      'email',
-      {
-        email: '',
-      }
-    ),
-    new Label(
-      'Senha',
-      'assets/icons/key.svg',
-      'Insira sua senha.',
-      'password',
-      'password',
-      {
-        password: '',
-      }
-    ),
-  ];
-
   constructor(
     private auth: AuthService,
     private router: Router,
@@ -59,6 +36,7 @@ export class LoginComponent implements OnInit {
         this.userService.loggedUserInfo(response.body!);
         if (response.headers.get('Authorization') !== null) {
           this.auth.token = response.headers.get('Authorization');
+          console.log(this.auth.token);
         }
         this.auth.authenticated = true;
         this.router.navigate(['/feed']);

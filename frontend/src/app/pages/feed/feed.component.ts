@@ -1,16 +1,16 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { MessageService } from 'primeng/api';
 import { Post } from 'src/app/model/Post';
 import { User } from 'src/app/model/User';
-import { AuthService } from 'src/app/service/auth.service';
-import { MenuItem } from 'primeng/api';
+import { MenuItem, Message, MessageService } from 'primeng/api';
 import { PostService } from 'src/app/service/post.service';
 import { UserService } from 'src/app/service/user.service';
+import { AuthService } from 'src/app/service/auth.service';
 
 @Component({
   selector: 'app-feed',
   templateUrl: './feed.component.html',
   styleUrls: ['./feed.component.scss'],
+  providers: [MessageService],
 })
 export class FeedComponent implements OnInit {
   user: User;
@@ -34,12 +34,16 @@ export class FeedComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private postService: PostService
+    private postService: PostService,
+    private messageService: MessageService,
+    private authService: AuthService
   ) {
     this.user = this.userService.info;
   }
 
   ngOnInit(): void {
+    console.log(this.authService.token);
+
     this.postService.getAll().subscribe((resp: Post[]) => {
       console.log(resp);
       this.posts = resp;
@@ -70,7 +74,29 @@ export class FeedComponent implements OnInit {
   }
 
   sendPost() {
-    console.log(this.post);
+    this.post.user.id = this.userService.info.id;
+    this.postService.createPost(this.post).subscribe(
+      (resp: Post) => {
+        console.log('oi');
+        this.dialog.show = false;
+        this.post = new Post();
+        this.messageService.add({
+          severity: 'success',
+          closable: false,
+          detail: 'Post criado!',
+          life: 3000,
+        });
+      },
+      (error) => {
+        const errorDefault = { severity: 'error', closable: true, life: 10000 };
+        console.log(error.error.errors);
+        const errorsArray: any = [];
+        error.error.errors.forEach((error: any) => {
+          errorsArray.push({ ...errorDefault, summary: error.defaultMessage });
+        });
+        this.messageService.addAll(errorsArray);
+      }
+    );
   }
 
   modules = {
