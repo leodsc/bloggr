@@ -1,9 +1,8 @@
 import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { httpMessage } from './login.message';
-import { Label } from 'src/app/classes/Label';
 import { User } from 'src/app/model/User';
 import { AuthService } from 'src/app/service/auth.service';
 import { UserService } from 'src/app/service/user.service';
@@ -19,14 +18,25 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private auth: AuthService,
+    private route: ActivatedRoute,
     private router: Router,
     private userService: UserService,
     private message: MessageService
   ) {}
 
-  ngOnInit(): void {
-    this.auth.getAll().subscribe((resp: User[]) => {
-      console.log(resp);
+  ngOnInit(): void {}
+
+  ngAfterViewInit() {
+    this.route.queryParams.subscribe((params) => {
+      const httpCodeArray = Object.values(params);
+      if (httpCodeArray.length != 0) {
+        const messages: any = [];
+        httpCodeArray.forEach((httpCode) => {
+          console.log(httpCode);
+          messages.push(httpMessage[Number(httpCode)]);
+        });
+        this.message.addAll(messages);
+      }
     });
   }
 
@@ -36,7 +46,6 @@ export class LoginComponent implements OnInit {
         this.userService.loggedUserInfo(response.body!);
         if (response.headers.get('Authorization') !== null) {
           this.auth.token = response.headers.get('Authorization');
-          console.log(this.auth.token);
         }
         this.auth.authenticated = true;
         this.router.navigate(['/feed']);

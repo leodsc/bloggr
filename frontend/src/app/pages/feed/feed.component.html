@@ -1,9 +1,45 @@
-<!-- <h1 *ngFor="let data of user | keyvalue">
-  {{ data.value }}
-</h1> -->
-<h1 *ngFor="let post of posts">
-  {{ post.title }}
-</h1>
+<main class="feed-page">
+  <section *ngFor="let post of posts" class="feed-page__post">
+    <div class="post__person-info">
+      <p-avatar
+        shape="circle"
+        size="large"
+        [style]="{
+          backgroundColor: null | randomAvatarBackgroundColor
+        }"
+        [label]="post.user.name | personInitials"
+      ></p-avatar>
+      <div class="info-ctn">
+        <p>
+          {{ post.user.name }},
+          {{ post.user.birthday | age }}
+        </p>
+        <p>teste</p>
+      </div>
+    </div>
+    <div class="post__info">
+      <div class="post__extra-info date">
+        <img src="assets/icons/calendar.svg" alt="" />
+        <p>{{ post.date | convertToDate }}</p>
+      </div>
+      <div class="post__extra-info tags">
+        <img src="assets/icons/tags.svg" alt="" />
+        <p-chip label="História" styleClass="mr-2 custom-chip"></p-chip>
+        <p-chip label="Engraçada" styleClass="mr-2 custom-chip"></p-chip>
+      </div>
+      <div class="post__content">
+        <h1 class="post__title">
+          {{ post.title }}
+        </h1>
+        <p class="post__text">
+          {{ post.text | extractHtmlText | minimizePostText }}
+        </p>
+      </div>
+      <img class="post-image" src="assets/images/post-placeholder.png" alt="" />
+    </div>
+  </section>
+</main>
+
 <p-toast position="top"></p-toast>
 <p-dialog
   header="{{ dialog.title }}"

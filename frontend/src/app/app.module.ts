@@ -31,9 +31,16 @@ import { ToastModule } from 'primeng/toast';
 import { SpeedDialModule } from 'primeng/speeddial';
 import { DialogModule } from 'primeng/dialog';
 import { CheckboxModule } from 'primeng/checkbox';
+import { AvatarModule } from 'primeng/avatar';
+import { ChipModule } from 'primeng/chip';
 
 // quill
 import { QuillModule } from 'ngx-quill';
+import { PersonInitialsPipe } from './pipe/person-initials.pipe';
+import { RandomAvatarBackgroundColorPipe } from './pipe/random-avatar-background-color.pipe';
+import { ExtractHtmlTextPipe } from './pipe/extract-html-text.pipe';
+import { MinimizePostTextPipe } from './pipe/minimize-post-text.pipe';
+import { ConvertToDatePipe } from './pipe/convert-to-date.pipe';
 
 @NgModule({
   declarations: [
@@ -46,6 +53,11 @@ import { QuillModule } from 'ngx-quill';
     ProfileComponent,
     FeedComponent,
     AgePipe,
+    PersonInitialsPipe,
+    RandomAvatarBackgroundColorPipe,
+    ExtractHtmlTextPipe,
+    MinimizePostTextPipe,
+    ConvertToDatePipe,
   ],
   imports: [
     BrowserModule,
@@ -61,6 +73,8 @@ import { QuillModule } from 'ngx-quill';
     SpeedDialModule,
     DialogModule,
     CheckboxModule,
+    AvatarModule,
+    ChipModule,
     QuillModule.forRoot(),
   ],
   providers: [httpInterceptorProviders],

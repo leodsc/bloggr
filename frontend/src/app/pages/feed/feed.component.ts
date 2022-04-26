@@ -5,6 +5,7 @@ import { MenuItem, Message, MessageService } from 'primeng/api';
 import { PostService } from 'src/app/service/post.service';
 import { UserService } from 'src/app/service/user.service';
 import { AuthService } from 'src/app/service/auth.service';
+import { PostInfo } from 'src/app/classes/PostInfo';
 
 @Component({
   selector: 'app-feed',
@@ -17,6 +18,7 @@ export class FeedComponent implements OnInit {
   posts: Post[];
   post = new Post();
   items: MenuItem[];
+  postInfo: PostInfo;
   dialog = {
     show: false,
     title: '',
@@ -42,10 +44,7 @@ export class FeedComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.authService.token);
-
     this.postService.getAll().subscribe((resp: Post[]) => {
-      console.log(resp);
       this.posts = resp;
     });
     this.items = [

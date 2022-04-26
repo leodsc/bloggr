@@ -1,4 +1,5 @@
 @import "../../scss/mixins";
+@import "../../scss/variables";
 
 :host ::ng-deep {
   .custom-icon {
@@ -7,6 +8,15 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+  }
+
+  .p-chip.custom-chip {
+    background: var(--green-500);
+  }
+
+  .p-chip-text {
+    color: white;
+    font-weight: 600;
   }
 
   .add-icon {
@@ -57,4 +67,70 @@
 
 .field-checkbox {
   @include flexCtn(row, center, center, 1rem);
+}
+
+.feed-page {
+  @include flexCtn(column, center, center, 2rem);
+  margin-top: 2rem;
+
+  &__post {
+    @include flexCtn(column, flex-start, center, 0);
+    padding: 1rem;
+    width: 90vw;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border: $thin-border;
+  }
+
+  .post {
+    &__person-info {
+      @include flexCtn(row, center, flex-start, 1.5rem);
+      margin-bottom: 1rem;
+    }
+
+    &__info {
+      position: relative;
+    }
+
+    &__content {
+      @include flexCtn(column, center, center, 1rem);
+      background-color: rgba(0, 0, 0, 0.5);
+      position: absolute;
+      width: 100%;
+      bottom: 3px;
+      border-bottom-left-radius: 14px;
+      border-bottom-right-radius: 14px;
+      padding: 1rem;
+    }
+
+    &__title,
+    &__text {
+      color: white;
+    }
+
+    &__text {
+      width: 100%;
+      word-break: break-word;
+      line-height: 1rem;
+    }
+
+    &__extra-info {
+      @include flexCtn(row, center, flex-start, 1rem);
+    }
+
+    &-image {
+      z-index: 999;
+      width: 100%;
+      height: 300px;
+      border-radius: 14px;
+      object-fit: fill;
+      margin-top: 1rem;
+    }
+
+    &__img-shade {
+      background-color: rgba(0, 0, 0, 0.1);
+      width: 100%;
+      height: 100%;
+      position: absolute;
+    }
+  }
 }
