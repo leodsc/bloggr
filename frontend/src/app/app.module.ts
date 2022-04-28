@@ -41,6 +41,8 @@ import { RandomAvatarBackgroundColorPipe } from './pipe/random-avatar-background
 import { ExtractHtmlTextPipe } from './pipe/extract-html-text.pipe';
 import { MinimizePostTextPipe } from './pipe/minimize-post-text.pipe';
 import { ConvertToDatePipe } from './pipe/convert-to-date.pipe';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { UserConfigComponent } from './pages/user-config/user-config.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +60,8 @@ import { ConvertToDatePipe } from './pipe/convert-to-date.pipe';
     ExtractHtmlTextPipe,
     MinimizePostTextPipe,
     ConvertToDatePipe,
+    PageNotFoundComponent,
+    UserConfigComponent,
   ],
   imports: [
     BrowserModule,

@@ -3,17 +3,21 @@
     <button (click)="display = !display" class="header__menu-btn">
       <i class="pi pi-align-justify" style="font-size: 2rem"></i>
     </button>
-    <h2 *ngIf="!auth.authenticated" class="header__title">Bloggr</h2>
-    <h3 *ngIf="auth.authenticated">
-      {{ userService.info.name }}, {{ userService.info.birthday | age }}
+    <h2 *ngIf="!userService.authenticated" class="header__title">Bloggr</h2>
+    <h3 *ngIf="userService.authenticated">
+      {{ userService.user.name }}, {{ userService.user.birthday | age }}
     </h3>
-    <img *ngIf="auth.authenticated" src="assets/icons/header/add.svg" alt="" />
+    <img
+      *ngIf="userService.authenticated"
+      src="assets/icons/header/add.svg"
+      alt=""
+    />
   </div>
 </header>
 <p-sidebar [style]="{ height: 'auto' }" position="left" [(visible)]="display">
   <ul class="nav__links-ctn">
     <a
-      routerLink="{{ link.text | lowercase }}"
+      routerLink="{{ link.path }}"
       class="nav__links-ctn--link"
       *ngFor="let link of links"
     >

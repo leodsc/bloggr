@@ -3,18 +3,17 @@ import { Post } from 'src/app/model/Post';
 import { User } from 'src/app/model/User';
 import { MenuItem, Message, MessageService } from 'primeng/api';
 import { PostService } from 'src/app/service/post.service';
-import { UserService } from 'src/app/service/user.service';
-import { AuthService } from 'src/app/service/auth.service';
 import { PostInfo } from 'src/app/classes/PostInfo';
+import { UserService } from 'src/app/service/user.service';
 
 @Component({
   selector: 'app-feed',
   templateUrl: './feed.component.html',
   styleUrls: ['./feed.component.scss'],
-  providers: [MessageService],
+  providers: [MessageService, User],
 })
 export class FeedComponent implements OnInit {
-  user: User;
+  // user: User;
   posts: Post[];
   post = new Post();
   items: MenuItem[];
@@ -38,10 +37,8 @@ export class FeedComponent implements OnInit {
     private userService: UserService,
     private postService: PostService,
     private messageService: MessageService,
-    private authService: AuthService
-  ) {
-    this.user = this.userService.info;
-  }
+    private user: User
+  ) {}
 
   ngOnInit(): void {
     this.postService.getAll().subscribe((resp: Post[]) => {
@@ -73,10 +70,9 @@ export class FeedComponent implements OnInit {
   }
 
   sendPost() {
-    this.post.user.id = this.userService.info.id;
+    this.post.user.id = this.user.id;
     this.postService.createPost(this.post).subscribe(
       (resp: Post) => {
-        console.log('oi');
         this.dialog.show = false;
         this.post = new Post();
         this.messageService.add({

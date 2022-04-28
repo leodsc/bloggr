@@ -4,7 +4,6 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { httpMessage } from './login.message';
 import { User } from 'src/app/model/User';
-import { AuthService } from 'src/app/service/auth.service';
 import { UserService } from 'src/app/service/user.service';
 
 @Component({
@@ -17,7 +16,6 @@ export class LoginComponent implements OnInit {
   user = new User();
 
   constructor(
-    private auth: AuthService,
     private route: ActivatedRoute,
     private router: Router,
     private userService: UserService,
@@ -32,22 +30,24 @@ export class LoginComponent implements OnInit {
       if (httpCodeArray.length != 0) {
         const messages: any = [];
         httpCodeArray.forEach((httpCode) => {
-          console.log(httpCode);
           messages.push(httpMessage[Number(httpCode)]);
         });
         this.message.addAll(messages);
       }
     });
+    if (this.router.url == '/sair') {
+      this.message.add(httpMessage[205]);
+    }
   }
 
   login() {
-    this.auth.login(this.user).subscribe(
+    this.userService.login(this.user).subscribe(
       (response: HttpResponse<User>) => {
-        this.userService.loggedUserInfo(response.body!);
         if (response.headers.get('Authorization') !== null) {
-          this.auth.token = response.headers.get('Authorization');
+          this.userService.token = response.headers.get('Authorization');
+          this.userService.user = response.body!;
         }
-        this.auth.authenticated = true;
+        this.userService.authenticated = true;
         this.router.navigate(['/feed']);
       },
       (error) => {

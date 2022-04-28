@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormAction } from 'src/app/classes/FormAction';
 import { User } from 'src/app/model/User';
-import { AuthService } from 'src/app/service/auth.service';
 import { MessageService } from 'primeng/api';
 import { labels } from './signup.label.content';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/service/user.service';
 
 @Component({
   selector: 'app-signup',
@@ -19,16 +19,16 @@ export class SignupComponent implements OnInit {
   @ViewChild('birthdayInput') birthdayInput: any;
 
   constructor(
-    private auth: AuthService,
     private message: MessageService,
-    private router: Router
+    private router: Router,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {}
 
   signup() {
     this.user.birthday = new Date(this.birthdayInput.inputFieldValue);
-    this.auth.signup(this.user).subscribe(
+    this.userService.signup(this.user).subscribe(
       (resp: User) => {
         this.message.add({
           key: 'message',

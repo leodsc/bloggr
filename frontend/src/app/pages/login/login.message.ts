@@ -1,12 +1,18 @@
 interface Message {
   severity: string;
   summary: string;
-  detail: string;
+  detail?: string;
   life?: number;
   closable?: boolean;
 }
 
 export const httpMessage: Record<number, Message> = {
+  205: {
+    severity: 'success',
+    summary: 'Você saiu da sua conta!',
+    closable: false,
+    life: 6000,
+  },
   401: {
     severity: 'error',
     summary: 'Faça o login!',
