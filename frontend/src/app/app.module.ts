@@ -7,17 +7,23 @@ import { FormComponent } from './components/form/form.component';
 import { FeedComponent } from './pages/feed/feed.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { SignupComponent } from './pages/signup/signup.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { UserConfigComponent } from './pages/user-config/user-config.component';
+import { PostComponent } from './pages/post/post.component';
 
 // angular modules
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, DomSanitizer } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 
 // pipes
 import { AgePipe } from './pipe/age.pipe';
+import { ExtractHtmlTextPipe } from './pipe/extract-html-text.pipe';
+import { MinimizePostTextPipe } from './pipe/minimize-post-text.pipe';
+import { ConvertToDatePipe } from './pipe/convert-to-date.pipe';
 
 // interceptor
 import { httpInterceptorProviders } from './https-interceptors/interceptorsProvider';
@@ -33,16 +39,13 @@ import { DialogModule } from 'primeng/dialog';
 import { CheckboxModule } from 'primeng/checkbox';
 import { AvatarModule } from 'primeng/avatar';
 import { ChipModule } from 'primeng/chip';
+import { ChipsModule } from 'primeng/chips';
+import { FileUploadModule } from 'primeng/fileupload';
 
 // quill
 import { QuillModule } from 'ngx-quill';
 import { PersonInitialsPipe } from './pipe/person-initials.pipe';
 import { RandomAvatarBackgroundColorPipe } from './pipe/random-avatar-background-color.pipe';
-import { ExtractHtmlTextPipe } from './pipe/extract-html-text.pipe';
-import { MinimizePostTextPipe } from './pipe/minimize-post-text.pipe';
-import { ConvertToDatePipe } from './pipe/convert-to-date.pipe';
-import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
-import { UserConfigComponent } from './pages/user-config/user-config.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +65,7 @@ import { UserConfigComponent } from './pages/user-config/user-config.component';
     ConvertToDatePipe,
     PageNotFoundComponent,
     UserConfigComponent,
+    PostComponent,
   ],
   imports: [
     BrowserModule,
@@ -79,6 +83,8 @@ import { UserConfigComponent } from './pages/user-config/user-config.component';
     CheckboxModule,
     AvatarModule,
     ChipModule,
+    ChipsModule,
+    FileUploadModule,
     QuillModule.forRoot(),
   ],
   providers: [httpInterceptorProviders],

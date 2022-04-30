@@ -1,5 +1,9 @@
 <main class="feed-page">
-  <section *ngFor="let post of posts" class="feed-page__post">
+  <section
+    *ngFor="let post of posts"
+    class="feed-page__post"
+    (click)="showPost(post)"
+  >
     <div class="post__person-info">
       <p-avatar
         shape="circle"
@@ -22,11 +26,11 @@
         <img src="assets/icons/calendar.svg" alt="" />
         <p>{{ post.date | convertToDate }}</p>
       </div>
-      <div class="post__extra-info tags">
+      <!-- <div class="post__extra-info tags">
         <img src="assets/icons/tags.svg" alt="" />
         <p-chip label="História" styleClass="mr-2 custom-chip"></p-chip>
         <p-chip label="Engraçada" styleClass="mr-2 custom-chip"></p-chip>
-      </div>
+      </div> -->
       <div class="post__content">
         <h1 class="post__title">
           {{ post.title }}
@@ -65,6 +69,8 @@
         <label for="float-input">Insira o título do texto.</label>
       </span>
     </div>
+
+    <!-- <p-chips [(ngModel)]="this.post.tags"></p-chips> -->
 
     <quill-editor
       [(ngModel)]="post.text"

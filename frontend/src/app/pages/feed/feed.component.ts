@@ -5,6 +5,7 @@ import { MenuItem, Message, MessageService } from 'primeng/api';
 import { PostService } from 'src/app/service/post.service';
 import { PostInfo } from 'src/app/classes/PostInfo';
 import { UserService } from 'src/app/service/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-feed',
@@ -37,13 +38,12 @@ export class FeedComponent implements OnInit {
     private userService: UserService,
     private postService: PostService,
     private messageService: MessageService,
+    private router: Router,
     private user: User
   ) {}
 
   ngOnInit(): void {
-    this.postService.getAll().subscribe((resp: Post[]) => {
-      this.posts = resp;
-    });
+    this.getAllPosts();
     this.items = [
       {
         icon: 'custom-icon add-icon',
@@ -60,6 +60,24 @@ export class FeedComponent implements OnInit {
     ];
   }
 
+  getAllPosts() {
+    this.postService.getAll().subscribe((resp: Post[]) => {
+      this.posts = resp;
+    });
+  }
+
+  showPost(post: Post) {
+    this.router.navigate(
+      [
+        `posts/${post.user.name.toLowerCase().split(' ').join('-')}/${post.title
+          .toLowerCase()
+          .split(' ')
+          .join('-')}`,
+      ],
+      { state: { postId: post.id } }
+    );
+  }
+
   mutateDialog(info: any) {
     this.dialog = { ...info };
     this.toggleDialog();
@@ -70,7 +88,8 @@ export class FeedComponent implements OnInit {
   }
 
   sendPost() {
-    this.post.user.id = this.user.id;
+    this.post.user.id = this.userService.user.id;
+    console.log(this.post);
     this.postService.createPost(this.post).subscribe(
       (resp: Post) => {
         this.dialog.show = false;
@@ -81,6 +100,7 @@ export class FeedComponent implements OnInit {
           detail: 'Post criado!',
           life: 3000,
         });
+        this.getAllPosts();
       },
       (error) => {
         const errorDefault = { severity: 'error', closable: true, life: 10000 };

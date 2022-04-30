@@ -1,6 +1,21 @@
 @import "../../scss/mixins";
 @import "../../scss/variables";
 
+:host ::ng-deep {
+  .p-button-icon,
+  .p-button-label {
+    color: white;
+  }
+
+  .p-fileupload-buttonbar {
+    @include flexCtn(column, center, center, 1rem);
+  }
+
+  .p-fileupload-content {
+    display: none;
+  }
+}
+
 .signup-page {
   @include pageForm();
 }
@@ -12,4 +27,9 @@
 .link-recover {
   text-decoration: underline;
   color: $purple;
+}
+
+.user-photo {
+  border-radius: 50%;
+  object-fit: cover;
 }

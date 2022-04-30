@@ -5,6 +5,7 @@ export class User {
   name: string;
   email: string;
   password: string;
+  photo: File | null;
   birthday: Date;
   posts: Post;
 }

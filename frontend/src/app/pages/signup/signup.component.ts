@@ -1,10 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, SecurityContext, ViewChild } from '@angular/core';
 import { FormAction } from 'src/app/classes/FormAction';
 import { User } from 'src/app/model/User';
 import { MessageService } from 'primeng/api';
 import { labels } from './signup.label.content';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/service/user.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-signup',
@@ -16,13 +17,20 @@ export class SignupComponent implements OnInit {
   user = new User();
   confirmPassword: string;
   redirect: number = 5;
+  fileUploadText = 'Insira uma foto';
+  isPhotoLoaded: boolean = false;
+  currentPhotoUrl: any;
+  private sanatizer: DomSanitizer;
   @ViewChild('birthdayInput') birthdayInput: any;
 
   constructor(
     private message: MessageService,
     private router: Router,
-    private userService: UserService
-  ) {}
+    private userService: UserService,
+    sanatizer: DomSanitizer
+  ) {
+    this.sanatizer = sanatizer;
+  }
 
   ngOnInit(): void {}
 
@@ -51,5 +59,26 @@ export class SignupComponent implements OnInit {
         });
       }
     );
+  }
+
+  photoSelected($event: any) {
+    const photo = $event.currentFiles[0];
+    this.user.photo = photo;
+    const safeResourceUrl = this.sanatizer.bypassSecurityTrustResourceUrl(
+      photo.objectURL
+    );
+    const sanitizedUrl = this.sanatizer.sanitize(
+      SecurityContext.RESOURCE_URL,
+      safeResourceUrl
+    );
+    this.currentPhotoUrl = sanitizedUrl;
+    this.fileUploadText = photo.name;
+    this.isPhotoLoaded = true;
+  }
+
+  removePhoto() {
+    this.fileUploadText = 'Insira uma foto';
+    this.user.photo = null;
+    this.isPhotoLoaded = false;
   }
 }

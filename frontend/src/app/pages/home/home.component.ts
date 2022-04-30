@@ -15,6 +15,5 @@ export class HomeComponent implements OnInit {
     //     this.auth.reset();
     //   }
     // });
-    console.log(this.userService.user);
   }
 }
